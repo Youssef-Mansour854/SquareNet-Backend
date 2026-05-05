@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Admin User",
+    "email": "admin@squarenet.com",
+    "password": "$2a$12$R9h/cIPz0gi.URNNX3ch2eQA014igW.vBv3o1w/HlqC1h5eG3X3oG",
+    "role": "admin",
+    "phone": "+201012345678"
+  },
+  {
+    "name": "Regular User",
+    "email": "user@squarenet.com",
+    "password": "$2a$12$R9h/cIPz0gi.URNNX3ch2eQA014igW.vBv3o1w/HlqC1h5eG3X3oG",
+    "role": "user",
+    "phone": "+201112345678"
+  }
+]

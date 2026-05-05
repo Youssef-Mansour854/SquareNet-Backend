@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "64d001a1c9f0bc2ea1802abc",
+    "name": "Residential Apartments",
+    "image": "https://example.com/images/residential.jpg"
+  },
+  {
+    "_id": "64d001a1c9f0bc2ea1802abd",
+    "name": "Commercial Stores",
+    "image": "https://example.com/images/commercial.jpg"
+  },
+  {
+    "_id": "64d001a1c9f0bc2ea1802abe",
+    "name": "Empty Lands",
+    "image": "https://example.com/images/land.jpg"
+  }
+]

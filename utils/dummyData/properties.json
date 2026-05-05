@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Modern Apartment in City Center",
+    "description": "A beautiful modern apartment located in the heart of the city with amazing views. This apartment features high ceilings, modern appliances, and a spacious balcony.",
+    "location": "Downtown, Cityscape",
+    "type": "Apartment",
+    "purpose": "sale",
+    "price": 2500000,
+    "area": 120,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+    "category": "64d001a1c9f0bc2ea1802abc",
+    "status": "available"
+  },
+  {
+    "title": "Spacious Commercial Office Space",
+    "description": "A very large commercial office space suitable for startups and big companies, featuring meeting rooms, high speed internet, and parking spaces.",
+    "location": "Business District, Uptown",
+    "type": "Office",
+    "purpose": "rent",
+    "price": 50000,
+    "area": 350,
+    "bedrooms": 0,
+    "bathrooms": 4,
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c",
+    "category": "64d001a1c9f0bc2ea1802abd",
+    "status": "available"
+  },
+  {
+    "title": "Luxury Villa with Private Pool",
+    "description": "An exquisite luxury villa featuring a private swimming pool, a massive garden, home theater, and smart home systems integrated.",
+    "location": "Beverly Hills, Suburbs",
+    "type": "Villa",
+    "purpose": "sale",
+    "price": 12000000,
+    "area": 600,
+    "bedrooms": 6,
+    "bathrooms": 7,
+    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
+    "category": "64d001a1c9f0bc2ea1802abc",
+    "status": "available"
+  }
+]
