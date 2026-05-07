@@ -16,34 +16,45 @@ const generateToken = (payload) => {
 // @route   POST /api/v1/auth/signup
 // @access  Public
 exports.signup = asyncHandler(async (req, res, next) => {
-  const user = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    phone: req.body.phone,
-    accountType: req.body.accountType || 'buyer',
-    role: req.body.role || 'user',
-  });
-
-  // Generate token
-  const token = generateToken(user._id);
-
-  res.status(201).json({ data: user, token });
+  console.log('Signup Attempt Body:', JSON.stringify(req.body));
+  try {
+    const user = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      phone: req.body.phone,
+      accountType: req.body.accountType || 'buyer',
+      role: req.body.role || 'user',
+    });
+    console.log('User Created Successfully:', user.email);
+    const token = generateToken(user._id);
+    res.status(201).json({ data: user, token });
+  } catch (err) {
+    console.error('Signup Error:', err);
+    return next(err);
+  }
 });
 
 // @desc    Login
 // @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res, next) => {
+  console.log('Login Attempt Body:', JSON.stringify(req.body));
   const user = await User.findOne({ email: req.body.email }).select('+password');
 
-  if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+  if (!user) {
+    console.log('Login Failed: User not found in DB');
     return next(new ApiError('Incorrect email or password', 401));
   }
 
-  // Generate token
+  const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
+  console.log('Password Match Result:', isPasswordMatch);
+
+  if (!isPasswordMatch) {
+    return next(new ApiError('Incorrect email or password', 401));
+  }
+
   const token = generateToken(user._id);
-  
   res.status(200).json({ data: user, token });
 });
 
