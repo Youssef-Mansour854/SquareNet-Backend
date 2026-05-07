@@ -9,8 +9,7 @@ const promote = async () => {
     await mongoose.connect(process.env.DB_URI);
     console.log('Connected to Database...');
 
-    const email = 'yh80984@gmail.com'; 
-    const user = await User.findOneAndUpdate(
+    const email = 'yh809840@gmail.com'; // الإيميل الصحيح للـ Super Admin    const user = await User.findOneAndUpdate(
       { email },
       { role: 'superadmin' },
       { new: true }
