@@ -81,12 +81,10 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
     return next(new ApiError("Only superadmin can create staff accounts", 403));
   }
 
-  const hashedPassword = await bcrypt.hash(password, 12);
-  
   const user = await User.create({
     name,
     email,
-    password: hashedPassword,
+    password,
     role: role || 'admin',
     accountType: 'owner', // Default for staff for easier access
   });

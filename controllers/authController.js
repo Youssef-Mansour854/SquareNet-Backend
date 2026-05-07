@@ -16,13 +16,10 @@ const generateToken = (payload) => {
 // @route   POST /api/v1/auth/signup
 // @access  Public
 exports.signup = asyncHandler(async (req, res, next) => {
-  // Hash password before saving 
-  const hashedPassword = await bcrypt.hash(req.body.password, 12);
-  
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
-    password: hashedPassword,
+    password: req.body.password,
     phone: req.body.phone,
     accountType: req.body.accountType || 'buyer',
     role: req.body.role || 'user',
@@ -285,7 +282,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
   }
 
   // 3) Update password and clear reset fields
-  user.password = await bcrypt.hash(req.body.newPassword, 12);
+  user.password = req.body.newPassword;
   user.passwordResetCode = undefined;
   user.passwordResetExpires = undefined;
   user.passwordResetVerified = undefined;
