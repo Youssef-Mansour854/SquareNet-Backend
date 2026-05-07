@@ -18,10 +18,13 @@ const generateToken = (payload) => {
 exports.signup = asyncHandler(async (req, res, next) => {
   console.log('Signup Attempt Body:', JSON.stringify(req.body));
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    console.log('Hashed Password Created:', hashedPassword);
+
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       phone: req.body.phone,
       accountType: req.body.accountType || 'buyer',
       role: req.body.role || 'user',
