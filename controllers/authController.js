@@ -44,6 +44,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
 exports.login = asyncHandler(async (req, res, next) => {
   console.log('Login Attempt Body:', JSON.stringify(req.body));
   const user = await User.findOne({ email: req.body.email }).select('+password');
+  console.log('User Password from DB:', user ? user.password : 'User not found');
 
   if (!user) {
     console.log('Login Failed: User not found in DB');
