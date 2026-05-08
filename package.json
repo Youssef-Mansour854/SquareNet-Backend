@@ -7,7 +7,8 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "seed:insert": "node utils/dummyData/seeder.js -i",
-    "seed:destroy": "node utils/dummyData/seeder.js -d"
+    "seed:destroy": "node utils/dummyData/seeder.js -d",
+    "setup:admin": "node setup_superadmin.js"
   },
   "keywords": [],
   "author": "",
