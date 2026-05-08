@@ -37,11 +37,16 @@ exports.resizePropertyImages = asyncHandler(async (req, res, next) => {
   if (req.files.image) {
     const publicId = `property-${uuidv4()}-${Date.now()}-main`;
 
-    const processedBuffer = await sharp(req.files.image[0].buffer)
-      .resize(600, 600)
-      .toFormat("jpeg")
-      .jpeg({ quality: 90 })
-      .toBuffer();
+    let processedBuffer = req.files.image[0].buffer;
+    try {
+      processedBuffer = await sharp(req.files.image[0].buffer)
+        .resize(600, 600)
+        .toFormat("jpeg")
+        .jpeg({ quality: 90 })
+        .toBuffer();
+    } catch (error) {
+      console.warn("Sharp could not process main image, falling back to original buffer:", error.message);
+    }
 
     // Upload to Cloudinary and save URL in db body
     req.body.image = await uploadToCloudinary(
@@ -58,11 +63,16 @@ exports.resizePropertyImages = asyncHandler(async (req, res, next) => {
       req.files.images.map(async (img, index) => {
         const publicId = `property-${uuidv4()}-${Date.now()}-${index + 1}`;
 
-        const processedBuffer = await sharp(img.buffer)
-          .resize(600, 600)
-          .toFormat("jpeg")
-          .jpeg({ quality: 90 })
-          .toBuffer();
+        let processedBuffer = img.buffer;
+        try {
+          processedBuffer = await sharp(img.buffer)
+            .resize(600, 600)
+            .toFormat("jpeg")
+            .jpeg({ quality: 90 })
+            .toBuffer();
+        } catch (error) {
+          console.warn("Sharp could not process additional image, falling back to original buffer:", error.message);
+        }
 
         const url = await uploadToCloudinary(
           processedBuffer,

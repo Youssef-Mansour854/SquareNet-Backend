@@ -120,11 +120,16 @@ exports.resizeProfileImage = asyncHandler(async (req, res, next) => {
 
   const publicId = `user-${uuidv4()}-${Date.now()}`;
 
-  const processedBuffer = await sharp(req.file.buffer)
-    .resize(300, 300)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toBuffer();
+  let processedBuffer = req.file.buffer;
+  try {
+    processedBuffer = await sharp(req.file.buffer)
+      .resize(300, 300)
+      .toFormat("jpeg")
+      .jpeg({ quality: 90 })
+      .toBuffer();
+  } catch (error) {
+    console.warn("Sharp could not process user profile image, falling back to original buffer:", error.message);
+  }
 
   // Upload to Cloudinary
   const imageUrl = await uploadToCloudinary(
